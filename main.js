@@ -3,18 +3,12 @@ objects = [];
 status = "";
 
 function preload(){
-    img = loadImage('dog_cat.jpg');
+    img = loadImage('bedroom.jpeg');
 }
 
 function setup(){
     canvas = createCanvas(380,380) ;
     canvas.center();
-    video = createCapture(VIDEO);
-    video.size(380,380);
-    video.hide();
-}
-
-function start(){
     objectDetector = ml5.objectDetector('cocossd' , modelLoaded);
     document.getElementById("status").innerHTML = "status : Detecting Objects";
 }
@@ -22,6 +16,7 @@ function start(){
 function modelLoaded(){
     console.log("model Loaded!")
     status = true;
+    objectDetector.detect(img,gotResult)
 }
 
 function gotResult( error , results){
